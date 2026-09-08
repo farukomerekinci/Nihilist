@@ -25,10 +25,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Pages ayari kapaliysa aç ve site adresini al
+      # Site adresini al.
+      # NOT: Pages'in bir kez elle açılmasi gerekiyor:
+      # Settings > Pages > Source: "GitHub Actions"
+      # (is akisi token'i Pages sitesini kendisi olusturamiyor)
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       # Statik oyun; derleme adimi yok, depo kökü oldugu gibi yayinlanir
       - uses: actions/upload-pages-artifact@v3

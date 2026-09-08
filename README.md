@@ -37,6 +37,25 @@ Telefonda test etmek ya da yerel ağda paylaşmak için basit bir sunucu:
 npx http-server . -p 8080
 ```
 
+## Canlı yayın (GitHub Pages)
+
+Oyun statik dosyalardan oluşur, bu yüzden GitHub Pages'te olduğu gibi çalışır.
+`.github/workflows/pages.yml` iş akışı `main` dalına yapılan her push'ta siteyi
+otomatik yayınlar.
+
+Depoda Pages'in **bir kez** açılması gerekir:
+
+1. **Settings → Pages** sayfasını aç.
+2. **Source** olarak **GitHub Actions** seç.
+3. **Actions → GitHub Pages → Run workflow** ile iş akışını çalıştır
+   (ya da yeni bir push at).
+
+Yayın adresi: **https://farukomerekinci.github.io/Nihilist/**
+
+Telefonda tarayıcıdan bu adresi açıp "Ana ekrana ekle" derseniz oyun tam ekran,
+uygulama gibi açılır. Oyun tek cihazda oynanır: soru açılır, telefon sırayla
+dolaşır, herkes gizlice seçer, sonra kartlar birlikte açılır.
+
 ## Dosyalar
 
 | Dosya | İçerik |
@@ -46,6 +65,9 @@ npx http-server . -p 8080
 | `app.js` | Oyun akışı, gizli oylama sırası, azınlık puanlaması ve hedef puan takibi |
 | `questions.js` | 71 soru kartı |
 | `assets/penguen.svg` | Penguen amblemi |
+| `assets/icon-192.png`, `assets/icon-512.png` | Ana ekran ikonları |
+| `manifest.webmanifest` | Telefonda uygulama gibi açılması için web app tanımı |
+| `.github/workflows/pages.yml` | GitHub Pages yayın iş akışı |
 
 ## Soru eklemek
 
