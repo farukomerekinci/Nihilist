@@ -1,4 +1,4 @@
-/* Nihilist Penguen - mor, mobil oncelikli tema */
+/* Nihilist Bal Porsukları - mor, mobil oncelikli tema */
 :root{
   --mor-900:#1E0F2E;
   --mor-800:#2A163F;
@@ -47,18 +47,19 @@ body{
 /* ---------- marka ---------- */
 .brand{text-align:center;display:grid;gap:8px;justify-items:center;padding-top:8px}
 .brand__mark{width:76px;height:76px;filter:drop-shadow(0 10px 20px rgba(0,0,0,.45))}
-.brand__title{display:grid;gap:2px;font-size:2rem;line-height:.95;letter-spacing:.01em;text-transform:uppercase;font-style:italic}
+.brand__title{display:grid;gap:2px;font-size:clamp(1.45rem,7.6vw,2rem);line-height:.95;letter-spacing:.01em;text-transform:uppercase;font-style:italic}
 .brand__title span:first-child{color:#fff}
 .brand__title span:last-child{color:var(--mor-300)}
 .brand__tagline{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mor-300)}
 
 /* ---------- paneller ---------- */
-.panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--yuvarlak);padding:16px;display:grid;gap:12px}
-.panel__title{font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--yuvarlak);padding:16px;display:grid;gap:12px;min-width:0}
+.panel>*{min-width:0}
+.panel__title{font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 8px}
 .panel__hint{font-size:.72rem;font-weight:400;letter-spacing:.02em;text-transform:none;color:var(--mor-300)}
 
-.players{list-style:none;display:grid;gap:8px}
-.player{display:flex;gap:8px;align-items:center}
+.players{list-style:none;display:grid;gap:8px;min-width:0}
+.player{display:flex;gap:8px;align-items:center;min-width:0}
 .player__dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
 .player input{
   flex:1;min-width:0;font:inherit;font-size:1rem;color:#fff;

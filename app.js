@@ -1,4 +1,4 @@
-/* Nihilist Penguen - oyun mantigi
+/* Nihilist Bal Porsukları - oyun mantigi
    Kural: azinlikta kalan oyuncular, cogunlukta kalan oyuncu sayisi kadar puan alir.
    Esitlik ya da ittifak varsa kimse puan alamaz.
    Hedef puana ulasan ilk oyuncu oyunu kazanir. */
@@ -8,7 +8,7 @@
   var MIN_PLAYERS = 3;
   var MAX_PLAYERS = 8;
   var COLORS = ["#F0912F", "#63D3B0", "#FF7A7A", "#7BB8FF", "#F5D66B", "#C08BFF", "#7ED957", "#FF9FD2"];
-  var STORE_KEY = "nihilist-penguen/setup";
+  var STORE_KEY = "nihilist-bal-porsuklari/setup";
 
   var $ = function (id) { return document.getElementById(id); };
 

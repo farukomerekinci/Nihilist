@@ -1,6 +1,6 @@
-# Nihilist Penguen
+# Nihilist Bal Porsukları
 
-Nihilist Penguen kart oyununun tek cihazda oynanan dijital sürümü.
+Nihilist Bal Porsukları kart oyununun tek cihazda oynanan dijital sürümü.
 Kurulum gerektirmeyen, tarayıcıda çalışan bir web uygulaması.
 
 > **Çoğunluk kaybeder. Cesurlar kazanır.**
@@ -70,7 +70,7 @@ dolaşır, herkes gizlice seçer, sonra kartlar birlikte açılır.
 | `styles.css` | Mor tema, mobil öncelikli düzen |
 | `app.js` | Oyun akışı, gizli oylama sırası, azınlık puanlaması ve hedef puan takibi |
 | `questions.js` | 71 soru kartı |
-| `assets/penguen.svg` | Penguen amblemi |
+| `assets/bal-porsugu.svg` | Bal porsuğu amblemi |
 | `assets/icon-192.png`, `assets/icon-512.png` | Ana ekran ikonları |
 | `manifest.webmanifest` | Telefonda uygulama gibi açılması için web app tanımı |
 | `.github/workflows/pages.yml` | GitHub Pages yayın iş akışı |

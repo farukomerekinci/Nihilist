@@ -1,4 +1,4 @@
-// Nihilist Penguen - Soru destesi
+// Nihilist Bal Porsukları - Soru destesi
 // Her kart iki secenek sunar. Amac cogunlugun disinda kalmaktir.
 const QUESTIONS = [
   { a: "Yüksek sesle video izleyen", b: "Telefonda hoparlörde konuşan", q: "Hangisini toplu taşımada görünce göz devirirsin?" },
