@@ -52,6 +52,12 @@ Depoda Pages'in **bir kez** açılması gerekir:
 
 Yayın adresi: **https://farukomerekinci.github.io/Nihilist/**
 
+> **Dikkat — hangi dal yayınlanır:** `github-pages` ortamı yalnızca deponun
+> **varsayılan dalından** dağıtıma izin verir. Başka bir daldan tetiklenen
+> çalışma, iş adımı hiç başlamadan birkaç saniyede başarısız olur (günlük bile
+> oluşmaz). Yayının `main`'den yapılmasını istiyorsanız **Settings → General →
+> Default branch** ayarından varsayılan dalı `main` yapın.
+
 Telefonda tarayıcıdan bu adresi açıp "Ana ekrana ekle" derseniz oyun tam ekran,
 uygulama gibi açılır. Oyun tek cihazda oynanır: soru açılır, telefon sırayla
 dolaşır, herkes gizlice seçer, sonra kartlar birlikte açılır.
