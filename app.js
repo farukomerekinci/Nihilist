@@ -1,6 +1,7 @@
 /* Nihilist Penguen - oyun mantigi
-   Kural: en az secilen cevabi isaretleyen oyuncular 1 puan alir.
-   Esitlik ya da ittifak varsa kimse puan alamaz. */
+   Kural: azinlikta kalan oyuncular, cogunlukta kalan oyuncu sayisi kadar puan alir.
+   Esitlik ya da ittifak varsa kimse puan alamaz.
+   Hedef puana ulasan ilk oyuncu oyunu kazanir. */
 (function () {
   "use strict";
 
@@ -13,7 +14,7 @@
 
   var state = {
     players: [],      // { name, color, score }
-    rounds: 8,
+    target: 15,       // hedef puan
     round: 0,         // tamamlanan tur sayisi
     deck: [],
     deckIndex: 0,
@@ -53,7 +54,7 @@
       var names = [];
       var inputs = document.querySelectorAll("#player-list input");
       for (var i = 0; i < inputs.length; i++) names.push(inputs[i].value);
-      localStorage.setItem(STORE_KEY, JSON.stringify({ names: names, rounds: state.rounds }));
+      localStorage.setItem(STORE_KEY, JSON.stringify({ names: names, target: state.target }));
     } catch (e) { /* depolama kapali olabilir */ }
   }
 
@@ -124,14 +125,14 @@
     $("player-list").innerHTML = "";
     for (var i = 0; i < names.length; i++) addPlayer(names[i]);
 
-    if (saved && saved.rounds) setRounds(saved.rounds);
+    if (saved && saved.target) setTarget(saved.target);
   }
 
-  function setRounds(n) {
-    state.rounds = n;
-    var chips = document.querySelectorAll("#round-chips .chip");
+  function setTarget(n) {
+    state.target = n;
+    var chips = document.querySelectorAll("#target-chips .chip");
     for (var i = 0; i < chips.length; i++) {
-      var on = Number(chips[i].dataset.rounds) === n;
+      var on = Number(chips[i].dataset.target) === n;
       chips[i].classList.toggle("is-on", on);
       chips[i].setAttribute("aria-checked", on ? "true" : "false");
     }
@@ -176,7 +177,7 @@
     state.turn = 0;
     state.order = shuffle(state.players.map(function (_, i) { return i; }));
 
-    $("round-eyebrow").textContent = "Tur " + (state.round + 1) + " / " + state.rounds;
+    $("round-eyebrow").textContent = "Tur " + (state.round + 1) + " · hedef " + state.target + " puan";
     $("round-question").textContent = state.question.q;
     $("round-opt1").textContent = state.question.a;
     $("round-opt2").textContent = state.question.b;
@@ -216,16 +217,19 @@
       (state.votes[i] === 1 ? side1 : side2).push(i);
     }
 
-    // Azinlik puan alir; esitlik ya da ittifak varsa kimse alamaz.
-    var winners = [];
+    // Azinlikta kalanlar, cogunluktaki oyuncu sayisi kadar puan alir.
+    // Esitlik ya da ittifak varsa kimse puan alamaz.
+    var winners = [], award = 0;
     if (side1.length !== side2.length && side1.length > 0 && side2.length > 0) {
-      winners = side1.length < side2.length ? side1 : side2;
+      var minorityIsOne = side1.length < side2.length;
+      winners = minorityIsOne ? side1 : side2;
+      award = minorityIsOne ? side2.length : side1.length;
     }
 
     state.lastGain = {};
     for (var w = 0; w < winners.length; w++) {
-      state.players[winners[w]].score += 1;
-      state.lastGain[winners[w]] = 1;
+      state.players[winners[w]].score += award;
+      state.lastGain[winners[w]] = award;
     }
 
     var verdict, sub;
@@ -238,7 +242,7 @@
     } else {
       var winningChoice = side1.length < side2.length ? 1 : 2;
       verdict = "Azınlık " + winningChoice + ". seçenek.";
-      sub = winners.length + " oyuncu farklı oldu ve +1 puan aldı.";
+      sub = winners.length + " oyuncu azınlıkta kaldı, her biri " + award + " puan aldı.";
     }
     $("reveal-verdict").textContent = verdict;
     $("reveal-sub").textContent = sub;
@@ -275,7 +279,7 @@
       if (isWin) {
         var pt = document.createElement("span");
         pt.className = "pt";
-        pt.textContent = "+1";
+        pt.textContent = "+" + state.lastGain[indexes[i]];
         li.appendChild(pt);
       }
       listEl.appendChild(li);
@@ -283,10 +287,10 @@
   }
 
   function showScore() {
-    var finished = state.round >= state.rounds;
     var ranked = state.players.map(function (p, i) { return { player: p, index: i }; })
       .sort(function (x, y) { return y.player.score - x.player.score; });
     var top = ranked.length ? ranked[0].player.score : 0;
+    var finished = top >= state.target;
 
     var board = $("scoreboard");
     board.innerHTML = "";
@@ -309,7 +313,7 @@
       if (state.lastGain[entry.index]) {
         var gain = document.createElement("span");
         gain.className = "gain";
-        gain.textContent = "+1";
+        gain.textContent = "+" + state.lastGain[entry.index];
         li.appendChild(gain);
       }
 
@@ -323,14 +327,12 @@
     if (finished) {
       var champs = ranked.filter(function (e) { return e.player.score === top; });
       $("score-eyebrow").textContent = "Oyun bitti";
-      $("score-title").textContent = top === 0
-        ? "Kimse sürüden ayrılamadı."
-        : (champs.length > 1
-            ? "Berabere: " + champs.map(function (e) { return e.player.name; }).join(", ")
-            : "Kazanan: " + champs[0].player.name);
+      $("score-title").textContent = champs.length > 1
+        ? "Berabere: " + champs.map(function (e) { return e.player.name; }).join(", ")
+        : "Kazanan: " + champs[0].player.name;
       $("score-continue").textContent = "Yeniden oyna";
     } else {
-      $("score-eyebrow").textContent = "Tur " + state.round + " / " + state.rounds + " bitti";
+      $("score-eyebrow").textContent = "Tur " + state.round + " bitti · hedef " + state.target + " puan";
       $("score-title").textContent = "Puan durumu";
       $("score-continue").textContent = "Sonraki tur";
     }
@@ -338,7 +340,8 @@
   }
 
   function continueFromScore() {
-    if (state.round >= state.rounds) {
+    var reached = state.players.some(function (p) { return p.score >= state.target; });
+    if (reached) {
       for (var i = 0; i < state.players.length; i++) state.players[i].score = 0;
       state.round = 0;
       state.lastGain = {};
@@ -356,10 +359,10 @@
     $("score-continue").addEventListener("click", continueFromScore);
     $("restart").addEventListener("click", function () { show("screen-setup"); });
 
-    var chips = document.querySelectorAll("#round-chips .chip");
+    var chips = document.querySelectorAll("#target-chips .chip");
     for (var i = 0; i < chips.length; i++) {
       chips[i].addEventListener("click", function (e) {
-        setRounds(Number(e.currentTarget.dataset.rounds));
+        setTarget(Number(e.currentTarget.dataset.target));
         saveSetup();
       });
     }

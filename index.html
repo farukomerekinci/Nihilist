@@ -27,11 +27,11 @@
     </div>
 
     <div class="panel">
-      <h2 class="panel__title">Tur sayısı</h2>
-      <div class="chips" id="round-chips" role="radiogroup" aria-label="Tur sayısı">
-        <button class="chip" type="button" role="radio" data-rounds="5">5</button>
-        <button class="chip is-on" type="button" role="radio" aria-checked="true" data-rounds="8">8</button>
-        <button class="chip" type="button" role="radio" data-rounds="12">12</button>
+      <h2 class="panel__title">Hedef puan <span class="panel__hint">ilk ulaşan kazanır</span></h2>
+      <div class="chips" id="target-chips" role="radiogroup" aria-label="Hedef puan">
+        <button class="chip" type="button" role="radio" data-target="10">10</button>
+        <button class="chip is-on" type="button" role="radio" aria-checked="true" data-target="15">15</button>
+        <button class="chip" type="button" role="radio" data-target="20">20</button>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
 
   <!-- ------------------------------------------------ TUR BASI -->
   <section class="screen" id="screen-round">
-    <p class="eyebrow" id="round-eyebrow">Tur 1 / 8</p>
+    <p class="eyebrow" id="round-eyebrow">Tur 1 · hedef 15 puan</p>
     <article class="card card--question">
       <p class="card__brand"><img src="assets/penguen.svg" alt="">Nihilist Penguen</p>
       <h2 class="card__question" id="round-question">Soru</h2>
@@ -115,9 +115,13 @@
       <ol class="rules">
         <li><b>Soru açılır.</b> Deste karıştırılır, en üstteki kart okunur.</li>
         <li><b>Herkes gizlice seçer.</b> Cihaz sırayla dolaşır; her oyuncu 1 ya da 2'yi işaretler.</li>
-        <li><b>Kartlar aynı anda açılır.</b> En az seçilen cevap puan kazandırır.</li>
-        <li><b>Çoğunluktaysan kaybettin.</b> Eşitlikte kimse puan alamaz.</li>
+        <li><b>Kartlar aynı anda açılır.</b> Amacınız azınlıkta kalmak, çoğunluktakiler kaybeder.</li>
+        <li><b>Puanlama.</b> Azınlıkta kalan oyuncular, çoğunlukta kalan oyuncu sayısı kadar puan kazanır.
+            Eşitlik durumunda kimse puan alamaz.</li>
+        <li><b>Kazanan.</b> Hedef puana ulaşan ilk oyuncu oyunu kazanır.</li>
       </ol>
+      <p class="note">Örnek: 5 kişilik oyunda 2 oyuncu 1'i, 3 oyuncu 2'yi seçtiyse azınlıktaki
+        2 oyuncunun her biri 3 puan alır.</p>
       <p class="note">Sürü psikolojisine kapılan elenir. Farklı ol, kazan.</p>
       <button class="btn btn--primary" id="close-rules" type="button">Anladım</button>
     </div>

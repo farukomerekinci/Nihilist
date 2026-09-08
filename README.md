@@ -10,13 +10,16 @@ Kurulum gerektirmeyen, tarayıcıda çalışan bir web uygulaması.
 
 1. **Soru açılır.** Deste karıştırılır, en üstteki kart okunur.
 2. **Herkes gizlice seçer.** Cihaz sırayla dolaşır, her oyuncu 1 ya da 2'yi işaretler.
-3. **Kartlar aynı anda açılır.** En az seçilen cevabı işaretleyenler **+1 puan** alır.
-4. **Çoğunluktaysan kaybettin.** Beraberlikte ya da herkes aynı seçeneği işaretlediğinde kimse puan alamaz.
+3. **Kartlar aynı anda açılır.** Amaç azınlıkta kalmak; çoğunluktakiler kaybeder.
+4. **Puanlama.** Azınlıkta kalan oyuncular, **çoğunlukta kalan oyuncu sayısı kadar** puan kazanır.
+   Eşitlik durumunda ya da herkes aynı seçeneği işaretlediğinde kimse puan alamaz.
+5. **Kazanan.** Hedef puana ulaşan ilk oyuncu oyunu kazanır.
 
-Belirlenen tur sayısı bitince en çok puanı toplayan oyuncu kazanır.
+> **Örnek:** 5 kişilik bir oyunda 2 oyuncu 1'i, 3 oyuncu 2'yi seçtiyse azınlıkta kalan
+> 2 oyuncunun her biri 3 puan alır.
 
 - **Oyuncu sayısı:** 3–8
-- **Tur seçenekleri:** 5, 8 veya 12
+- **Hedef puan:** 10, 15 veya 20
 - **Süre:** yaklaşık 15–20 dakika
 
 ## Çalıştırma
@@ -40,7 +43,7 @@ npx http-server . -p 8080
 | --- | --- |
 | `index.html` | Ekranların işaretlemesi (kurulum, tur, gizli seçim, açılış, skor) |
 | `styles.css` | Mor tema, mobil öncelikli düzen |
-| `app.js` | Oyun akışı, gizli oylama sırası ve azınlık puanlaması |
+| `app.js` | Oyun akışı, gizli oylama sırası, azınlık puanlaması ve hedef puan takibi |
 | `questions.js` | 71 soru kartı |
 | `assets/penguen.svg` | Penguen amblemi |
 
@@ -57,7 +60,7 @@ karıştırılır; tüm kartlar tükenirse yeniden karıştırılıp baştan ba�
 
 ## Notlar
 
-- Oyuncu adları ve tur tercihi tarayıcının yerel deposunda saklanır, böylece
+- Oyuncu adları ve hedef puan tercihi tarayıcının yerel deposunda saklanır, böylece
   sonraki oyunda hazır gelir. Depolama kapalıysa oyun yine sorunsuz çalışır.
 - Gizli seçim sırası her turda yeniden karıştırılır; sıra hep aynı oyuncudan
   başlamaz.
