@@ -1,0 +1,168 @@
+/* Nihilist Penguen - mor, mobil oncelikli tema */
+:root{
+  --mor-900:#1E0F2E;
+  --mor-800:#2A163F;
+  --mor-700:#3D1F5C;
+  --mor-600:#5B2A86;
+  --mor-500:#7A45A8;
+  --mor-300:#B98FD9;
+  --mor-100:#EDE2F7;
+  --kagit:#F7F2FC;
+  --turuncu:#F0912F;
+  --nane:#63D3B0;
+  --kirmizi:#FF7A7A;
+  --gölge:0 18px 40px rgba(20,8,35,.45);
+  --yuvarlak:20px;
+  --font:"Trebuchet MS","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none !important}
+html,body{height:100%}
+body{
+  font-family:var(--font);
+  color:var(--mor-100);
+  background:
+    radial-gradient(120% 80% at 50% 0%, #6E3399 0%, transparent 60%),
+    radial-gradient(90% 60% at 10% 100%, #4A2170 0%, transparent 55%),
+    var(--mor-900);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+#app{
+  max-width:520px;margin:0 auto;min-height:100%;
+  padding:max(20px,env(safe-area-inset-top)) 20px max(24px,env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;
+}
+
+/* ---------- ekranlar ---------- */
+.screen{display:none;flex:1;flex-direction:column;gap:18px;animation:in .28s ease both}
+.screen.is-active{display:flex}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.screen{animation:none}}
+.screen__title{font-size:1.5rem;letter-spacing:.02em}
+
+/* ---------- marka ---------- */
+.brand{text-align:center;display:grid;gap:8px;justify-items:center;padding-top:8px}
+.brand__mark{width:76px;height:76px;filter:drop-shadow(0 10px 20px rgba(0,0,0,.45))}
+.brand__title{display:grid;gap:2px;font-size:2rem;line-height:.95;letter-spacing:.01em;text-transform:uppercase;font-style:italic}
+.brand__title span:first-child{color:#fff}
+.brand__title span:last-child{color:var(--mor-300)}
+.brand__tagline{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mor-300)}
+
+/* ---------- paneller ---------- */
+.panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--yuvarlak);padding:16px;display:grid;gap:12px}
+.panel__title{font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.panel__hint{font-size:.72rem;font-weight:400;letter-spacing:.02em;text-transform:none;color:var(--mor-300)}
+
+.players{list-style:none;display:grid;gap:8px}
+.player{display:flex;gap:8px;align-items:center}
+.player__dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.player input{
+  flex:1;min-width:0;font:inherit;font-size:1rem;color:#fff;
+  background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;padding:11px 12px;
+}
+.player input:focus{outline:2px solid var(--mor-300);outline-offset:1px}
+.player__remove{
+  flex:0 0 auto;width:38px;height:38px;border-radius:12px;cursor:pointer;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  color:var(--mor-100);font-size:1.2rem;line-height:1;
+}
+.player__remove:disabled{opacity:.3;cursor:not-allowed}
+
+.chips{display:flex;gap:8px}
+.chip{
+  flex:1;padding:12px;border-radius:14px;cursor:pointer;font:inherit;font-size:1rem;font-weight:700;
+  background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.14);color:var(--mor-100);
+}
+.chip.is-on{background:var(--turuncu);border-color:var(--turuncu);color:#2A163F}
+
+/* ---------- butonlar ---------- */
+.btn{
+  font:inherit;font-weight:700;cursor:pointer;border-radius:16px;padding:14px 18px;
+  border:1px solid transparent;transition:transform .12s ease,filter .12s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn--primary{background:var(--turuncu);color:#2A163F;box-shadow:0 10px 24px rgba(240,145,47,.28)}
+.btn--ghost{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:var(--mor-100)}
+.btn--link{background:none;color:var(--mor-300);text-decoration:underline;padding:6px}
+.btn--big{width:100%;font-size:1.06rem;padding:17px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mor-300);text-align:center}
+.note{font-size:.85rem;color:var(--mor-300);text-align:center;line-height:1.45}
+.error{color:var(--kirmizi);font-size:.88rem;text-align:center}
+
+/* ---------- soru karti ---------- */
+.card{
+  background:linear-gradient(160deg,var(--mor-600),var(--mor-700) 60%,var(--mor-800));
+  border:1px solid rgba(255,255,255,.16);border-radius:24px;padding:22px;box-shadow:var(--gölge);
+  display:grid;gap:16px;
+}
+.card--question{margin:auto 0;align-content:center;min-height:250px}
+.card__brand{display:flex;gap:8px;align-items:center;justify-content:center;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mor-300)}
+.card__brand img{width:26px;height:26px;opacity:.9}
+.card__question{font-size:1.35rem;line-height:1.3;text-align:center;color:#fff}
+.card--compact .card__question{font-size:1.12rem}
+
+.options{list-style:none;display:grid;gap:10px}
+.option{display:flex;gap:12px;align-items:center;background:rgba(0,0,0,.3);border-radius:14px;padding:13px 14px}
+.option__num{
+  flex:0 0 auto;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  font-weight:800;background:var(--mor-300);color:var(--mor-900);
+}
+.option__text{font-size:1rem;line-height:1.3}
+
+/* ---------- gizli secim ---------- */
+.handoff,.voting{flex:1;display:flex;flex-direction:column;gap:16px;justify-content:center}
+.handoff__name{font-size:2rem;text-align:center;color:#fff;word-break:break-word}
+.vote-buttons{display:grid;gap:12px}
+.vote{
+  display:flex;gap:14px;align-items:center;text-align:left;cursor:pointer;font:inherit;
+  background:linear-gradient(150deg,var(--mor-500),var(--mor-700));
+  border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:20px 18px;color:#fff;
+  box-shadow:var(--gölge);
+}
+.vote:active{transform:scale(.99)}
+.vote__num{
+  flex:0 0 auto;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  font-size:1.4rem;font-weight:800;background:var(--turuncu);color:var(--mor-900);
+}
+.vote__text{font-size:1.05rem;line-height:1.3}
+
+/* ---------- acilis ---------- */
+.reveal__verdict{font-size:1.6rem;text-align:center;color:#fff;line-height:1.25}
+.reveal__sub{text-align:center;color:var(--mor-300);font-size:.9rem}
+.tally{display:grid;gap:12px;margin:auto 0}
+.tally__side{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px;display:grid;gap:10px}
+.tally__side.is-win{border-color:var(--nane);background:rgba(99,211,176,.14)}
+.tally__side.is-lose{opacity:.72}
+.tally__head{display:flex;gap:10px;align-items:center;font-size:1rem;line-height:1.3}
+.tally__names{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.tally__names li{display:flex;gap:7px;align-items:center;background:rgba(0,0,0,.3);border-radius:999px;padding:6px 12px;font-size:.88rem}
+.tally__names li.is-empty{opacity:.55;font-style:italic}
+.tally__names .player__dot{width:10px;height:10px}
+.tally__names .pt{color:var(--nane);font-weight:700}
+
+/* ---------- skor ---------- */
+.scoreboard{list-style:none;display:grid;gap:9px;margin:auto 0}
+.scoreboard li{
+  display:flex;gap:12px;align-items:center;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;padding:14px 16px;
+}
+.scoreboard .rank{width:24px;color:var(--mor-300);font-weight:700}
+.scoreboard .name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scoreboard .pts{font-size:1.2rem;font-weight:800;color:var(--turuncu)}
+.scoreboard .gain{font-size:.8rem;color:var(--nane);font-weight:700}
+.scoreboard li.is-leader{border-color:var(--turuncu);background:rgba(240,145,47,.14)}
+
+/* ---------- kurallar ---------- */
+.sheet{position:fixed;inset:0;background:rgba(10,4,18,.75);display:grid;place-items:end center;padding:16px;z-index:10}
+.sheet__panel{
+  width:100%;max-width:520px;background:var(--mor-800);border:1px solid rgba(255,255,255,.16);
+  border-radius:24px;padding:22px;display:grid;gap:14px;box-shadow:var(--gölge);
+}
+.sheet__panel h2{font-size:1.25rem}
+.rules{display:grid;gap:10px;padding-left:20px;font-size:.95rem;line-height:1.45}
+.rules b{color:#fff}

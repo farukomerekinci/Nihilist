@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5B2A86">
+<meta name="description" content="Nihilist Penguen - herkesten farklı ol, oyunu kazan. Tek cihazda sırayla oynanan azınlık oyunu.">
+<title>Nihilist Penguen</title>
+<link rel="icon" href="assets/penguen.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ------------------------------------------------ KURULUM -->
+  <section class="screen is-active" id="screen-setup">
+    <header class="brand">
+      <img class="brand__mark" src="assets/penguen.svg" alt="">
+      <h1 class="brand__title"><span>Nihilist</span><span>Penguen</span></h1>
+      <p class="brand__tagline">Herkesten farklı ol. Oyunu kazan.</p>
+    </header>
+
+    <div class="panel">
+      <h2 class="panel__title">Oyuncular <span class="panel__hint" id="player-count-hint">3–8 oyuncu</span></h2>
+      <ul class="players" id="player-list"></ul>
+      <button class="btn btn--ghost" id="add-player" type="button">+ Oyuncu ekle</button>
+    </div>
+
+    <div class="panel">
+      <h2 class="panel__title">Tur sayısı</h2>
+      <div class="chips" id="round-chips" role="radiogroup" aria-label="Tur sayısı">
+        <button class="chip" type="button" role="radio" data-rounds="5">5</button>
+        <button class="chip is-on" type="button" role="radio" aria-checked="true" data-rounds="8">8</button>
+        <button class="chip" type="button" role="radio" data-rounds="12">12</button>
+      </div>
+    </div>
+
+    <p class="error" id="setup-error" role="alert" hidden></p>
+    <button class="btn btn--primary btn--big" id="start-game" type="button">Oyunu başlat</button>
+    <button class="btn btn--link" id="show-rules" type="button">Nasıl oynanır?</button>
+  </section>
+
+  <!-- ------------------------------------------------ TUR BASI -->
+  <section class="screen" id="screen-round">
+    <p class="eyebrow" id="round-eyebrow">Tur 1 / 8</p>
+    <article class="card card--question">
+      <p class="card__brand"><img src="assets/penguen.svg" alt="">Nihilist Penguen</p>
+      <h2 class="card__question" id="round-question">Soru</h2>
+      <ol class="options">
+        <li class="option"><span class="option__num">1</span><span class="option__text" id="round-opt1">—</span></li>
+        <li class="option"><span class="option__num">2</span><span class="option__text" id="round-opt2">—</span></li>
+      </ol>
+    </article>
+    <p class="note">Sırayla cihazı alın, kimseye göstermeden seçin.</p>
+    <button class="btn btn--primary btn--big" id="begin-voting" type="button">Seçime geç</button>
+  </section>
+
+  <!-- ------------------------------------------------ GIZLI SECIM -->
+  <section class="screen" id="screen-vote">
+    <div class="handoff" id="handoff">
+      <p class="eyebrow">Cihazı devret</p>
+      <h2 class="handoff__name" id="handoff-name">Oyuncu</h2>
+      <p class="note">Sadece sen görebilmelisin.</p>
+      <button class="btn btn--primary btn--big" id="handoff-ready" type="button">Hazırım</button>
+    </div>
+
+    <div class="voting" id="voting" hidden>
+      <p class="eyebrow"><span id="vote-name">Oyuncu</span> · gizli seçim</p>
+      <article class="card card--compact">
+        <h2 class="card__question" id="vote-question">Soru</h2>
+      </article>
+      <div class="vote-buttons">
+        <button class="vote" type="button" data-choice="1">
+          <span class="vote__num">1</span><span class="vote__text" id="vote-opt1">—</span>
+        </button>
+        <button class="vote" type="button" data-choice="2">
+          <span class="vote__num">2</span><span class="vote__text" id="vote-opt2">—</span>
+        </button>
+      </div>
+      <p class="note" id="vote-progress">1 / 4 oyuncu</p>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------ ACILIS -->
+  <section class="screen" id="screen-reveal">
+    <p class="eyebrow">Kartlar açılıyor</p>
+    <h2 class="reveal__verdict" id="reveal-verdict">—</h2>
+    <p class="reveal__sub" id="reveal-sub"></p>
+    <div class="tally">
+      <div class="tally__side" id="tally-1">
+        <p class="tally__head"><span class="option__num">1</span><span id="tally-opt1">—</span></p>
+        <ul class="tally__names" id="tally-names1"></ul>
+      </div>
+      <div class="tally__side" id="tally-2">
+        <p class="tally__head"><span class="option__num">2</span><span id="tally-opt2">—</span></p>
+        <ul class="tally__names" id="tally-names2"></ul>
+      </div>
+    </div>
+    <button class="btn btn--primary btn--big" id="next-round" type="button">Devam</button>
+  </section>
+
+  <!-- ------------------------------------------------ SKOR -->
+  <section class="screen" id="screen-score">
+    <p class="eyebrow" id="score-eyebrow">Puan durumu</p>
+    <h2 class="screen__title" id="score-title">Puan durumu</h2>
+    <ol class="scoreboard" id="scoreboard"></ol>
+    <button class="btn btn--primary btn--big" id="score-continue" type="button">Sonraki tur</button>
+    <button class="btn btn--link" id="restart" type="button">Yeni oyun</button>
+  </section>
+
+  <!-- ------------------------------------------------ KURALLAR -->
+  <div class="sheet" id="rules-sheet" hidden>
+    <div class="sheet__panel" role="dialog" aria-modal="true" aria-label="Nasıl oynanır">
+      <h2>Nasıl oynanır?</h2>
+      <ol class="rules">
+        <li><b>Soru açılır.</b> Deste karıştırılır, en üstteki kart okunur.</li>
+        <li><b>Herkes gizlice seçer.</b> Cihaz sırayla dolaşır; her oyuncu 1 ya da 2'yi işaretler.</li>
+        <li><b>Kartlar aynı anda açılır.</b> En az seçilen cevap puan kazandırır.</li>
+        <li><b>Çoğunluktaysan kaybettin.</b> Eşitlikte kimse puan alamaz.</li>
+      </ol>
+      <p class="note">Sürü psikolojisine kapılan elenir. Farklı ol, kazan.</p>
+      <button class="btn btn--primary" id="close-rules" type="button">Anladım</button>
+    </div>
+  </div>
+
+</div>
+<script src="questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
